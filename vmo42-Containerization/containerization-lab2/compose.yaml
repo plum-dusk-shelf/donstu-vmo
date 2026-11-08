@@ -1,0 +1,25 @@
+services:
+  my-site-frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on: ["my-site-backend"]
+
+  my-site-backend:
+    build: ./backend
+    depends_on:
+      my-site-db:
+        condition: service_healthy
+      
+  my-site-db:
+    build: ./database
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data: null

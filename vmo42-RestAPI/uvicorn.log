@@ -1,0 +1,16 @@
+INFO:     Started server process [331410]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     5.165.253.44:59202 - "POST /teams/add HTTP/1.1" 200 OK
+INFO:     81.19.216.121:11232 - "GET / HTTP/1.1" 404 Not Found
+INFO:     81.19.216.84:2702 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     193.176.31.197:9328 - "GET / HTTP/1.1" 404 Not Found
+INFO:     193.176.31.222:14940 - "GET /mcp HTTP/1.1" 404 Not Found
+INFO:     193.176.31.237:9308 - "GET /api/mcp HTTP/1.1" 404 Not Found
+INFO:     193.176.31.231:1166 - "GET /mcp/ HTTP/1.1" 404 Not Found
+INFO:     81.19.216.95:6636 - "GET /sse HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [331410]

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ESP32 Weather Station</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+.container {
+    padding: 20px;
+}
+
+.header {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.value {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.label {
+    opacity: 0.7;
+}
+
+.table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+}
+
+.table th, .table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #00c6ff;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="header">🌦 ESP32 Weather Dashboard</div>
+
+<div class="cards">
+    <div class="card">
+        <div class="label">Temperature</div>
+        <div class="value" id="temp">--</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Humidity</div>
+        <div class="value" id="hum">--</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Pressure</div>
+        <div class="value" id="pres">--</div>
+    </div>
+</div>
+
+<canvas id="chart" height="100"></canvas>
+
+<button onclick="downloadCSV()">Download CSV</button>
+
+<table class="table">
+<thead>
+<tr>
+<th>Time</th>
+<th>Temp</th>
+<th>Humidity</th>
+<th>Pressure</th>
+</tr>
+</thead>
+<tbody id="table"></tbody>
+</table>
+
+</div>
+
+<script>
+let chart;
+
+async function loadData() {
+    let res = await fetch('/api/data');
+    let data = await res.json();
+
+	let last = data[data.length - 1];
+	document.getElementById("temp").innerText = last.temperature + " °C";
+	document.getElementById("hum").innerText = last.humidity + " %";
+    document.getElementById("pres").innerText = last.pressure + " hPa";
+
+	let html = "";
+    data.reverse().forEach(d => {
+        html += `<tr>
+            <td>${d.time}</td>
+            <td>${d.temperature}</td>
+            <td>${d.humidity}</td>
+            <td>${d.pressure}</td>
+        </tr>`;
+    });
+    document.getElementById("table").innerHTML = html;
+
+	let horizon = 20
+    let labels = data.slice(-horizon).map(d => d.time);
+
+    let temps = data.slice(-horizon).map(d => d.temperature);
+    let hums  = data.slice(-horizon).map(d => d.humidity);
+    let press = data.slice(-horizon).map(d => d.pressure - 990);
+
+    if (!chart) {
+        chart = new Chart(document.getElementById("chart"), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Temperature (°C)',
+                        data: temps
+                    },
+                    {
+                        label: 'Humidity (%)',
+                        data: hums
+                    },
+                    {
+                        label: 'Pressure (hPa)',
+                        data: press
+                    }
+                ]
+            }
+        });
+    } else {
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = temps;
+        chart.data.datasets[1].data = hums;
+        chart.data.datasets[2].data = press;
+        chart.update();
+    }
+}
+
+function downloadCSV() {
+    window.location.href = "/csv";
+}
+
+setInterval(loadData, 5000);
+loadData();
+
+</script>
+
+</body>
+</html>

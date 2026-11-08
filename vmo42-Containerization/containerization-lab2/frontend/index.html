@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Мой сайт</h1>
+
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="about.html">О нас</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Работа с базой данных</h2>
+
+    <form id="form">
+        <input
+            type="text"
+            id="name"
+            placeholder="Введите имя"
+            required
+        >
+
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <h3>Данные из базы:</h3>
+
+    <ul id="users"></ul>
+</main>
+
+<footer>
+    <p>© 2026 Мой сайт</p>
+</footer>
+
+<script>
+    async function loadUsers() {
+        const response = await fetch('/api/users');
+        const users = await response.json();
+
+        const list = document.getElementById('users');
+        list.innerHTML = '';
+
+        users.forEach(user => {
+            const item = document.createElement('li');
+            item.textContent = user.name;
+            list.appendChild(item);
+        });
+    }
+
+    document.getElementById('form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+
+        await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: name })
+        });
+
+        document.getElementById('name').value = '';
+
+        loadUsers();
+    });
+
+    loadUsers();
+</script>
+
+</body>
+</html>
