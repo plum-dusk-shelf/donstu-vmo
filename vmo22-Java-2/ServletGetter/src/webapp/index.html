@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест сервлета информации о сессии</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Тестирование сервлета информации о сессии</h1>
+    <p>Это простая HTML-страница для взаимодействия с сервлетом, который показывает информацию о сессии.</p>
+    <p>Нажмите на кнопку ниже, чтобы перейти к сервлету и увидеть информацию о вашей сессии:</p>
+
+    <a href="/SessionInfoServlet" class="button">Перейти к информации о сессии</a>
+
+    <h2>Как это работает:</h2>
+    <ul>
+        <li>При первом посещении сервлета создается новая сессия</li>
+        <li>Сервлет запоминает количество ваших запросов в текущей сессии</li>
+        <li>На странице отображается ID сессии, время ее создания и текущее время на сервере</li>
+        <li>Обновите страницу, чтобы увеличить счетчик запросов</li>
+    </ul>
+</div>
+</body>
+</html>

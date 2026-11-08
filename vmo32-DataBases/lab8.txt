@@ -1,0 +1,48 @@
+dnf install timescaledb
+
+systemctl restart postgresql
+
+CREATE EXTENSION timescaledb;
+
+CREATE TABLE sensors_data (
+    time TIMESTAMPTZ NOT NULL,
+    sensor_id INT NOT NULL,
+    value FLOAT NOT NULL
+);
+
+SELECT create_hypertable('sensors_data', 'time');
+
+CREATE TABLE sensors ( 
+    id BIGSERIAL PRIMARY KEY,
+    room VARCHAR(255) 
+);
+
+ALTER TABLE sensors_data                                                               
+  ADD CONSTRAINT fk_sensor_room
+  FOREIGN KEY (sensor_id) REFERENCES sensors(id)
+  ON DELETE SET NULL;
+
+SELECT *                   
+FROM sensors AS a
+JOIN sensors_data AS b
+    ON a.id = b.sensor_id;
+
+CREATE MATERIALIZED VIEW mv_sensor_daily AS
+SELECT
+  date_trunc('day', time)::date AS day,
+  sensor_id,
+  count(*)        AS cnt,
+  avg(value)      AS avg_value,
+  min(value)      AS min_value,
+  max(value)      AS max_value,
+  sum(value)      AS sum_value
+FROM sensors_data
+GROUP BY date_trunc('day', time)::date, sensor_id;
+
+CREATE INDEX mv_sensor_daily_idx ON mv_sensor_daily (day, sensor_id);
+
+SELECT * FROM mv_sensor_daily
+WHERE day BETWEEN '2025-01-01' AND '2025-12-31'
+  AND sensor_id = 2;
+
+REFRESH MATERIALIZED VIEW mv_sensor_daily;

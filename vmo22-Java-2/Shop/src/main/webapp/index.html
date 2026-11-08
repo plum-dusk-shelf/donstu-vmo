@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инвентарная система</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #444;
+            text-align: center;
+        }
+        .welcome-text {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .features {
+            margin: 30px 0;
+        }
+        .feature {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать в систему управления товарами</h1>
+        
+        <div class="welcome-text">
+            <p>Это веб-приложение позволяет управлять базой данных товаров, категорий и производителей.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>Управление товарами</h3>
+                <p>Просматривайте, добавляйте, редактируйте и удаляйте товары из базы данных.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>Категории товаров</h3>
+                <p>Организуйте товары по категориям для удобного поиска и фильтрации.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>Производители</h3>
+                <p>Управляйте информацией о производителях товаров.</p>
+            </div>
+        </div>
+        
+        <div class="btn-container">
+            <a href="/products" class="btn">Перейти к управлению товарами</a>
+        </div>
+    </div>
+</body>
+</html>

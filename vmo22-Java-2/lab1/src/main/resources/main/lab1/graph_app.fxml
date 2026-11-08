@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.lab1.GraphAppController">
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Функция:" />
+            <ComboBox fx:id="functionComboBox" prefWidth="150" />
+            <Label text="От:" />
+            <TextField fx:id="fromField" prefWidth="50" />
+            <Label text="До:" />
+            <TextField fx:id="toField" prefWidth="50" />
+            <Label text="Шаг:" />
+            <TextField fx:id="stepField" prefWidth="50" />
+            <Label text="Толщина:" />
+            <TextField fx:id="widthField" prefWidth="50" />
+            <Button text="Добавить" fx:id="addButton" onAction="#addFunction" />
+        </HBox>
+    </top>
+    <center>
+        <!-- Убраны свойства animated и title из FXML -->
+        <LineChart fx:id="chart">
+            <xAxis>
+                <NumberAxis side="BOTTOM" label="x" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" label="y" />
+            </yAxis>
+        </LineChart>
+    </center>
+    <left>
+        <VBox fx:id="functionsList" spacing="5" style="-fx-padding: 10;" prefWidth="200" />
+    </left>
+</BorderPane>

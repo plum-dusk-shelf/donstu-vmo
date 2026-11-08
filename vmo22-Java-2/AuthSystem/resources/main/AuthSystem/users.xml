@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<usersWrapper>
+    <users>
+        <login>sima</login>
+        <passwordHash>3151978</passwordHash>
+    </users>
+    <users>
+        <login>sima.ffrus</login>
+        <passwordHash>3556653</passwordHash>
+    </users>
+    <users>
+        <login>index</login>
+        <passwordHash>100346066</passwordHash>
+    </users>
+    <users>
+        <login>1234</login>
+        <passwordHash>1509442</passwordHash>
+    </users>
+    <users>
+        <login>9876user</login>
+        <passwordHash>-995380580</passwordHash>
+    </users>
+</usersWrapper>

@@ -1,0 +1,9 @@
+{
+    "IVAN": {
+        "phrase_id": 1,
+        "mean_interval": 607.847,
+        "deviation": 375.0,
+        "eps_mean": 156.35,
+        "eps_deviation": 128.686
+    }
+}

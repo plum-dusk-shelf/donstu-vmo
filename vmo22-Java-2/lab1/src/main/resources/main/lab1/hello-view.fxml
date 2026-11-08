@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.canvas.Canvas?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.lab1.MainController">
+  <HBox>
+    <VBox fx:id="toggleButtonContainer" spacing="10"/>
+    <Canvas fx:id="canvas" width="600" height="600"/>
+  </HBox>
+  <Button fx:id="saveButton" text="Сохранить"/>
+</VBox>

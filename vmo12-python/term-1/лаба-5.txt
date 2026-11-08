@@ -1,0 +1,40 @@
+#Лабораторная работа №5
+
+#задание1 (вариант 3)
+x = int(input("x="))
+y = int(input("y="))
+z = int(input("z="))
+if x > y and x > z:
+    print ("max=",x)
+elif y > x and y > z:
+    print ("max=",y)
+elif z > x and z > y:
+    print ("max=",z)
+
+#задание2 (вариант 3)
+x = int(input("x="))
+if x>0 :
+    math.sin(x)
+    n = 2*math.sin(x)
+    print ("f(x)=",n)
+elif x<-10:
+    n = x
+    print ("f(x)=",n)
+else:
+    n=3*x
+    print ("f(x)=",n)
+
+#задание3 (2.Площади прямоугольников)
+a = int(input("a="))
+b = int(input("b="))
+m = int(input("m="))
+n = int(input("n="))
+p=a*b #1прям-к
+g=m*n #2прям-к
+print(p,g)
+if p > g:
+    print ("max=p(1 прям-к)=",p)
+elif g > p:
+    print ("max=g(2 прям-к)=",g)
+else:
+    print("p=g (прямоугольники одинаковые")

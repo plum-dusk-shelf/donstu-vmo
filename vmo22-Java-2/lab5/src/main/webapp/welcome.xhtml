@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Добро пожаловать</title>
+</h:head>
+<h:body>
+    <h1>Добро пожаловать, #{user.name}!</h1>
+    <p>Ваш email: #{user.email}</p>
+    <p>Ваш телефон: #{user.phone}</p>
+    
+    <h:link outcome="login" value="Выйти"/>
+</h:body>
+</html>
