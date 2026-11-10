@@ -1,0 +1,19 @@
+sevices:
+  my-app:
+    build: .
+    ports: 8000:4000/tcp
+    depends_on:
+      - my-postgres:
+          condition: service_healthy
+
+  my-postgres:
+    image: postgres
+    volumes: my-postgres-data:/var/lib/postgresql
+     healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  my-postgres-data: null

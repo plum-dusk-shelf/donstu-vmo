@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-fields = [
+
     "id",
     "City",        
     "Players",
@@ -18,19 +18,7 @@ class Team(BaseModel):
     players: int
     score: int
 
-@router.get("/teams/")
-async def root():
-    return {"message": "Hello Web"}
-
-@router.get("/teams/about")
-async def about():
-    return {"course": "Web Development"}
-
-@router.get("/teams/users")
-async def users():
-    return {"users": ["Alex", "Maria"]}
-
-@router.get("/teams/teams")
+@router.get("/teams")
 async def teams():
     return teams_db
 
@@ -48,11 +36,9 @@ async def team(id: str):
     
     raise404()
 
-new_team_id = 0
 @router.post("/teams/add")
 async def add(new_team_data: Team):
-    global new_team_id
-    new_team_id += 1
+    new_team_id = len(teams_db) + 1
 
     new_team = {
         "id": f'{new_team_id:06}',

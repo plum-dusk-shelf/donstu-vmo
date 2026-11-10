@@ -11,3 +11,10 @@ app.include_router(players_router)
 async def info():
     return {"Theme": "Sport Club"}
 
+@app.get("/about")
+async def about():
+    return {"course": "Web Development"}
+
+@app.get("/")
+async def root():
+    return {"message": "Hello Web"}

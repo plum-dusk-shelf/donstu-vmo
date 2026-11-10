@@ -11,19 +11,7 @@ class Player(BaseModel):
     team: str
     score: int
 
-@router.get("/players/")
-async def root():
-    return {"message": "Hello Web"}
-
-@router.get("/players/about")
-async def about():
-    return {"course": "Web Development"}
-
-@router.get("/players/users")
-async def users():
-    return {"users": ["Alex", "Maria"]}
-
-@router.get("/players/players")
+@router.get("/players")
 async def players():
     return players_db
 
@@ -41,15 +29,12 @@ async def player(id: str):
     
     raise404('player')
 
-new_player_id = 0
 @router.post("/players/add")
 async def add(new_player_data: Player):
     from teams import teams_db
-    print(new_player_data.team, [t['id'] for t in teams_db])
     if new_player_data.team not in [t['id'] for t in teams_db]:
         raise404('team id')
-    global new_player_id
-    new_player_id += 1
+    new_player_id = len(players_db) + 1
 
     new_player = {
         "id": f'{new_player_id:06}',
@@ -61,10 +46,12 @@ async def add(new_player_data: Player):
     players_db.append(new_player)
     return new_player
 
+import os
 @router.on_event("startup")
 async def main():
-    await add(Player(name="Ivan", team="000001", score=20))
-    await add(Player(name="John", team="000002", score=20))
+    if not players_db:
+        await add(Player(name="Ivan", team="000001", score=20))
+        await add(Player(name="John", team="000002", score=20))
 
 @router.delete("/player/delete/{id}")
 async def delete(id: str):
